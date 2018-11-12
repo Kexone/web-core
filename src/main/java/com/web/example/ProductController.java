@@ -1,7 +1,7 @@
-package com.web.controllers;
+package com.web.example;
 
 
-import com.web.services.ExampleService;
+import com.web.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +10,10 @@ import java.util.List;
 @RestController
 //@RequestMapping(value = "/api")
 @EnableAutoConfiguration
-public class ExampleController extends AbstractController{
+public class ProductController extends AbstractController {
 
     @Autowired
-    ExampleService exampleService;
+    ProductService productService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     String home() {
@@ -27,13 +27,14 @@ public class ExampleController extends AbstractController{
 
     @RequestMapping(value = "/some/{id}", method = RequestMethod.GET)
     String some(@PathVariable("id") int id) throws Exception {
-        if(id == 666)  throw new Exception("Error");
-        return "Hello !" + id;
+        Product product = productService.getProduct(id);
+        if(product == null)  throw new Exception("Error");
+        return "Hello !" + product;
     }
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public List<String> getProducts() {
-        List<String> productsList = exampleService.getProducts();
+    public List<Product> getProducts() {
+        List<Product> productsList = productService.getProducts();
         return productsList;
     }
     @RequestMapping(value = "/products", method = RequestMethod.POST)

@@ -1,18 +1,17 @@
 package examples;
 
-import com.web.services.ExampleService;
+import com.web.example.ProductService;
+import org.spockframework.runtime.SpockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Profile("test")
 @Configuration
-public class ExampleTests {
+public class ExampleTests extends SpockException {
 
-    @Autowired
-    private ExampleService exampleService;
 
-   // public ExampleService exampleService() {
+   // public ProductService exampleService() {
     //    return null;
    // }
 }
