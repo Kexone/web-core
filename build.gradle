@@ -36,10 +36,14 @@ mainClassName='com.web.Application'
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-security")
-    compile('org.apache.logging.log4j:log4j-core:2.11.1')
-    compile('org.apache.logging.log4j:log4j-1.2-api:2.11.1')
+    compile('org.slf4j:slf4j-api:1.7.5')
+    compile('org.slf4j:jcl-over-slf4j:1.7.5')
+    compile('org.slf4j:slf4j-log4j12:1.7.5')
+    compile('log4j:log4j:1.2.17')
     compile('io.springfox:springfox-swagger2:2.7.0')
     compile('io.springfox:springfox-swagger-ui:2.7.0')
-    testCompile('org.spockframework:spock-core:1.1-groovy-2.4-rc-2')
+    testCompile("org.springframework.boot:spring-boot-starter-test") //for AopTestUtils
+    testCompile("org.spockframework:spock-core:1.2-groovy-2.5")
+    testCompile("org.spockframework:spock-spring:1.2-groovy-2.5")
 }
 
