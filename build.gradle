@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.1.0.RELEASE'
+        springBootVersion = '2.0.2.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -10,6 +10,9 @@ buildscript {
     }
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
 
 group 'com.web'
 version '1.0-SNAPSHOT'
@@ -22,7 +25,7 @@ apply plugin: 'war'
 apply plugin: 'application'
 
 bootJar {
-    baseName = 'gs-spring-boot'
+    baseName = 'eureka-service'
     version =  '0.1.0'
     sourceCompatibility = 1.8
 
@@ -33,17 +36,29 @@ repositories {
 }
 mainClassName='com.web.Application'
 
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-starter-parent:Finchley.SR2'
+    }
+}
+
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-security")
-    compile('org.slf4j:slf4j-api:1.7.5')
-    compile('org.slf4j:jcl-over-slf4j:1.7.5')
-    compile('org.slf4j:slf4j-log4j12:1.7.5')
-    compile('log4j:log4j:1.2.17')
-    compile('io.springfox:springfox-swagger2:2.7.0')
-    compile('io.springfox:springfox-swagger-ui:2.7.0')
-    testCompile("org.springframework.boot:spring-boot-starter-test") //for AopTestUtils
-    testCompile("org.spockframework:spock-core:1.2-groovy-2.5")
-    testCompile("org.spockframework:spock-spring:1.2-groovy-2.5")
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.0.2.RELEASE"
+
+    // compile "org.springframework.cloud:spring-cloud-starter-parent:Finchley.SR2"
+//    compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.0.2.RELEASE")
+    //compile("org.springframework.cloud:spring-cloud-netflix-core:2.0.2.RELEASE")
+    //  compile("org.springframework.cloud:spring-cloud-starter-parent:Finchley.SR2")
+    //compile("org.springframework.boot:spring-boot-starter-web")
+
+
+    //  compile('org.slf4j:slf4j-api:1.7.5')
+  //  compile('org.slf4j:jcl-over-slf4j:1.7.5')
+  //  compile('log4j:log4j:1.2.17')
+  //  compile('io.springfox:springfox-swagger2:2.7.0')
+ //   compile('io.springfox:springfox-swagger-ui:2.7.0')
+  //  testCompile("org.springframework.boot:spring-boot-starter-test") //for AopTestUtils
+ //  testCompile("org.spockframework:spock-core:1.2-groovy-2.5")
+ //   testCompile("org.spockframework:spock-spring:1.2-groovy-2.5")
 }
 
